@@ -33,7 +33,7 @@ public class KafkaProducer extends Thread{
     @Override
     public void run() {
         int messageNo = 1;
-        while (true){
+        while (messageNo <= 20){
             String messageStr = "Message_" + messageNo;
             System.out.println("Send:" + messageStr);
             producer.send(new KeyedMessage<Integer, String>(topic, messageStr));

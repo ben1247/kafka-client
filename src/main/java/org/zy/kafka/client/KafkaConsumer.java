@@ -22,12 +22,16 @@ public class KafkaConsumer extends Thread {
 
     private final String topic;
 
-    public KafkaConsumer(String topic){
+    private final String groupId;
+
+    public KafkaConsumer(String threadName , String topic , String groupId){
+        this.setName(threadName);
         this.topic = topic;
+        this.groupId = groupId;
         this.consumer = Consumer.createJavaConsumerConnector(createConsumerConfig());
     }
 
-    private static ConsumerConfig createConsumerConfig(){
+    private ConsumerConfig createConsumerConfig(){
         // Consumer实例所需的配置
         Properties properties = new Properties();
 
@@ -36,7 +40,7 @@ public class KafkaConsumer extends Thread {
         properties.put("zookeeper.connect",KafkaProperties.ZOOKEEPER_CONNECT);
 
         //group 代表一个消费组
-        properties.put("group.id", KafkaProperties.GROUP_ID);
+        properties.put("group.id", this.groupId);
 
         // ZooKeeper的session的超时时间，如果在这段时间内没有收到ZK的心跳，则会被认为该Kafka server挂掉了。
         // 如果把这个值设置得过低可能被误认为挂掉，如果设置得过高，如果真的挂了，则需要很长时间才能被server得知。
@@ -96,7 +100,7 @@ public class KafkaConsumer extends Thread {
         ConsumerIterator<String,String> iterator = stream.iterator();
 
         while (iterator.hasNext()){
-            System.out.println("receive：" + iterator.next().message());
+            System.out.println(this.getName() + " receive：" + iterator.next().message());
             try {
                 sleep(KafkaProperties.RECEIVE_MSG_INTERVAL);
             } catch (InterruptedException e) {

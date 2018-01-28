@@ -5,12 +5,18 @@ package org.zy.kafka.client;
  */
 public class KafkaClientApp {
 
-    public static void main(String[] args)
-    {
-        KafkaProducer producerThread = new KafkaProducer(KafkaProperties.TOPIC);
-        producerThread.start();
-        KafkaConsumer consumerThread = new KafkaConsumer(KafkaProperties.TOPIC);
-        consumerThread.start();
+    public static void main(String[] args) {
+
+        KafkaProducer producer = new KafkaProducer(KafkaProperties.TOPIC);
+        producer.start();
+
+        KafkaConsumer consumer1 = new KafkaConsumer("t1",KafkaProperties.TOPIC,"group1");
+        consumer1.start();
+
+        KafkaConsumer consumer2 = new KafkaConsumer("t2",KafkaProperties.TOPIC,"group1");
+        consumer2.start();
+
+
     }
 
 }
