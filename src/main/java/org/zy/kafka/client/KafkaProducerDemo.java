@@ -9,13 +9,13 @@ import java.util.Properties;
 /**
  * Created by yuezhang on 18/1/27.
  */
-public class KafkaProducer extends Thread{
+public class KafkaProducerDemo extends Thread{
 
     private final Producer<Integer, String> producer;
     private final String topic;
 
 
-    public KafkaProducer(String topic){
+    public KafkaProducerDemo(String topic){
         this.topic = topic;
 
         final Properties props = new Properties();
@@ -35,7 +35,7 @@ public class KafkaProducer extends Thread{
         int messageNo = 1;
         while (messageNo <= 20){
             String messageStr = "Message_" + messageNo;
-            System.out.println("Send:" + messageStr);
+            System.out.println("Send: " + messageStr);
             producer.send(new KeyedMessage<Integer, String>(topic, messageStr));
             messageNo++;
             try {

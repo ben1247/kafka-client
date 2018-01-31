@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * Created by yuezhang on 18/1/27.
  */
-public class KafkaConsumer extends Thread {
+public class KafkaConsumerDemo extends Thread {
 
     private final ConsumerConnector consumer;
 
@@ -24,7 +24,7 @@ public class KafkaConsumer extends Thread {
 
     private final String groupId;
 
-    public KafkaConsumer(String threadName , String topic , String groupId){
+    public KafkaConsumerDemo(String threadName , String topic , String groupId){
         this.setName(threadName);
         this.topic = topic;
         this.groupId = groupId;
