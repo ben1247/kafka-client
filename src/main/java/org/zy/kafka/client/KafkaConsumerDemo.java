@@ -110,10 +110,7 @@ public class KafkaConsumerDemo extends Thread {
 
     }
 
-    @Override
-    public void destroy() {
-        if (consumer != null){
-            consumer.shutdown();
-        }
+    public ConsumerConnector getConsumer() {
+        return consumer;
     }
 }
