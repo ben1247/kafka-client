@@ -45,4 +45,11 @@ public class KafkaProducerDemo extends Thread{
             }
         }
     }
+
+    @Override
+    public void destroy() {
+        if (producer != null){
+            producer.close();
+        }
+    }
 }
