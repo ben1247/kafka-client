@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 public class KafkaProducerDemo extends Thread{
 
-    private final Producer<Integer, String> producer;
+    private final Producer<String, String> producer;
     private final String topic;
 
 
@@ -37,8 +37,8 @@ public class KafkaProducerDemo extends Thread{
         int messageNo = 1;
         while (messageNo <= 10){
             String messageStr = "Message_" + getNow();
+            producer.send(new KeyedMessage<>(topic,"" + messageNo, messageStr));
             System.out.println("Send: " + messageStr);
-            producer.send(new KeyedMessage<Integer, String>(topic, messageStr));
             messageNo++;
             try {
                 sleep(KafkaProperties.SEND_MSG_INTERVAL);
@@ -53,7 +53,7 @@ public class KafkaProducerDemo extends Thread{
         return sdf.format(new Date());
     }
 
-    public Producer<Integer, String> getProducer() {
+    public Producer<String, String> getProducer() {
         return producer;
     }
 }
