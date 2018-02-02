@@ -13,7 +13,7 @@ public class KafkaProperties {
 
     final static int SEND_MSG_INTERVAL = 1000;
 
-    final static int RECEIVE_MSG_INTERVAL = 2000;
+    final static int RECEIVE_MSG_INTERVAL = 100;
 
 
 }

@@ -4,6 +4,8 @@ import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -33,8 +35,8 @@ public class KafkaProducerDemo extends Thread{
     @Override
     public void run() {
         int messageNo = 1;
-        while (messageNo <= 20){
-            String messageStr = "Message_" + messageNo;
+        while (messageNo <= 10){
+            String messageStr = "Message_" + getNow();
             System.out.println("Send: " + messageStr);
             producer.send(new KeyedMessage<Integer, String>(topic, messageStr));
             messageNo++;
@@ -44,6 +46,11 @@ public class KafkaProducerDemo extends Thread{
                 e.printStackTrace();
             }
         }
+    }
+
+    private String getNow(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return sdf.format(new Date());
     }
 
     public Producer<Integer, String> getProducer() {

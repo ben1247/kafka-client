@@ -16,12 +16,13 @@ public class KafkaClientApp {
         KafkaConsumerDemo consumer2 = new KafkaConsumerDemo("t2",KafkaProperties.TOPIC,"group1");
         consumer2.start();
 
-        Thread.sleep(60000);
+        Thread.sleep(20000);
 
         // 关闭
         producer.getProducer().close();
         consumer1.getConsumer().shutdown();
         consumer2.getConsumer().shutdown();
+        System.out.println("已关闭");
 
 
     }
