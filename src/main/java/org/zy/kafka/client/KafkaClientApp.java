@@ -22,8 +22,6 @@ public class KafkaClientApp {
         producer.getProducer().close();
         consumer1.getConsumer().shutdown();
         consumer2.getConsumer().shutdown();
-        System.out.println("已关闭");
-
 
     }
 
